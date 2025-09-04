@@ -31,6 +31,14 @@ const app = express();
 
 // setInterval(reloadWebsite, interval);
 
+app.use(
+  cors({
+    origin: "https://ecommerce-frontend-25.vercel.app", // your frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // needed if you use cookies / JWT with credentials
+  })
+);
+
 app.use(express.json());
 app.use(cors());
 
