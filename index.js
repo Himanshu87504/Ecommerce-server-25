@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import connectDb from "./utils/db.js";
 import cloudinary from "cloudinary";
 import cors from "cors";
-import axios from "axios";
 
 dotenv.config();
 
@@ -15,32 +14,19 @@ cloudinary.v2.config({
 
 const app = express();
 
-// const url = `http://localhost:5173`;
-// const interval = 30000;
+app.use(express.json());
 
-// function reloadWebsite() {
-//   axios
-//     .get(url)
-//     .then((response) => {
-//       console.log("website reloded");
-//     })
-//     .catch((error) => {
-//       console.error(`Error : ${error.message}`);
-//     });
-// }
-
-// setInterval(reloadWebsite, interval);
-
+// ✅ CORS setup (your frontend + localhost for dev)
 app.use(
   cors({
-    origin: "https://ecommerce-frontend-25.vercel.app", // your frontend URL
+    origin: [
+      "http://localhost:5173",             // for development
+      "https://ecommerce-frontend-25.vercel.app", // your deployed frontend
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true, // needed if you use cookies / JWT with credentials
   })
 );
-
-app.use(express.json());
-app.use(cors());
 
 const port = process.env.PORT;
 
@@ -51,9 +37,10 @@ import cartRoutes from "./routes/cart.js";
 import addressRoutes from "./routes/address.js";
 import orderRoutes from "./routes/order.js";
 
-app.get("/", () => {
-  console.log("Hi i am Himanshu")
-})
+// root route
+app.get("/", (req, res) => {
+  res.send("Hi i am Himanshu 🚀 Backend is running fine!");
+});
 
 // using routes
 app.use("/api", userRoutes);
@@ -63,6 +50,6 @@ app.use("/api", addressRoutes);
 app.use("/api", orderRoutes);
 
 app.listen(port, () => {
-  console.log(`server is running on http://localhost:${port}`);
+  console.log(`✅ Server is running on http://localhost:${port}`);
   connectDb();
 });
