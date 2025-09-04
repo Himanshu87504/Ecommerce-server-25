@@ -14,19 +14,13 @@ cloudinary.v2.config({
 
 const app = express();
 
-app.use(express.json());
+// ✅ CORS setup (only your deployed frontend)
+app.use(cors({
+  origin: "https://ecommerce-frontend-25.vercel.app",
+  credentials: true
+}));
 
-// ✅ CORS setup (your frontend + localhost for dev)
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",             // for development
-      "https://ecommerce-frontend-25.vercel.app", // your deployed frontend
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true, // needed if you use cookies / JWT with credentials
-  })
-);
+app.use(express.json());
 
 const port = process.env.PORT;
 
