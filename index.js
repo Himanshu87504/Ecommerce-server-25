@@ -33,7 +33,7 @@ import cartRoutes from "./routes/cart.js";
 import addressRoutes from "./routes/address.js";
 import orderRoutes from "./routes/order.js";
 
-app.get("/", (res, req) => {
+app.get("/", (req, res) => {
   res.send("Hi i am himanshu")
 })
 
