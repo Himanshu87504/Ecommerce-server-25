@@ -15,8 +15,10 @@ cloudinary.v2.config({
 
 const app = express();
 
+const frontend = process.env.Frontend_Url
+
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: frontend,
   credentials: true
 }));
 

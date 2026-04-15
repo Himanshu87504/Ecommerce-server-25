@@ -67,11 +67,13 @@
 // export default sendOtp;
 
 // //Hello
-
 import { Resend } from "resend";
 import dotenv from "dotenv";
 
 dotenv.config();
+
+// Check API key (temporary debug)
+// console.log("RESEND KEY:", process.env.RESEND_API_KEY);
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -87,10 +89,6 @@ body {
 font-family: Arial, sans-serif;
 margin: 0;
 padding: 0;
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
 }
 .container {
 background-color: #fff;
@@ -98,6 +96,8 @@ padding: 20px;
 border-radius: 8px;
 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 text-align: center;
+max-width: 400px;
+margin: 40px auto;
 }
 h1 {
 color: red;
@@ -110,6 +110,7 @@ color: #666;
 font-size: 36px;
 color: #7b68ee;
 margin-bottom: 30px;
+font-weight: bold;
 }
 </style>
 </head>
@@ -125,16 +126,18 @@ margin-bottom: 30px;
 </html>`;
 
     try {
-        await resend.emails.send({
-            from: "onboarding@resend.dev",
-            to: email,
-            subject,
-            html
+        const response = await resend.emails.send({
+            from: "onboarding@resend.dev", // sandbox email
+            to: email, // send to user email
+            subject: subject || "Your OTP Code",
+            html,
         });
 
+        console.log("Email Response:", response);
         console.log("OTP sent successfully");
+
     } catch (error) {
-        console.log(error);
+        console.log("Email Error:", error);
     }
 };
 
