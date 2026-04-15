@@ -15,21 +15,11 @@ cloudinary.v2.config({
 
 const app = express();
 
-// const url = `http://localhost:5173`;
-// const interval = 30000;
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 
-// function reloadWebsite() {
-//   axios
-//     .get(url)
-//     .then((response) => {
-//       console.log("website reloded");
-//     })
-//     .catch((error) => {
-//       console.error(`Error : ${error.message}`);
-//     });
-// }
-
-// setInterval(reloadWebsite, interval);
 
 app.use(express.json());
 app.use(cors());
