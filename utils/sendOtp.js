@@ -8,7 +8,7 @@ const sendOtp = async ({ email, subject, otp }) => {
         secure: true,
         auth: {
             user: process.env.Gmail,
-            pass: process.env.Password,
+            // pass: process.env.Password,
         },
     });
 
