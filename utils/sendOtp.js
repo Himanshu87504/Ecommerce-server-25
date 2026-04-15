@@ -150,7 +150,7 @@ const sendOtp = async (email, otp) => {
         service: "gmail",
         auth: {
             user: process.env.GMAIL,
-            pass: process.env.APP_PASSWORD,
+            pass: process.env.PASSWORD,
         },
     });
 
